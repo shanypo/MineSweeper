@@ -5,12 +5,11 @@ function renderBoard(board) {
     strHTML += '<tr>\n';
     for (var j = 0; j < board[0].length; j++) {
       var currCell = board[i][j];
-      var cellClass = `cell cell-${i}-${j}`;;
-      currCell.isMine ? cellClass += ' mine': cellClass += ' hidden';
-      strHTML += `<td class="${cellClass}
-      "onmousedown="isRightClick(this,${i}, ${j},event)"></td>\n`
+      var className = `cell cell-${i}-${j}`;
+      className += currCell.isMine ? ' mine': ' hidden';
+      strHTML += `<td class="${className}" onmousedown="isRightClick(this, ${i}, ${j},event)"></td>\n`
+      
     }
-    strHTML += '</tr>'
   }
   strHTML += '</tr>\n';
 
@@ -89,3 +88,6 @@ function getRandomCell() {
   return emptyCell;
 }
 
+function getSelector(coord) { // {i:3 , j:5}
+  return '.cell-' + i + '-' + j // #cell-3-5
+}

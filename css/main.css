@@ -1,15 +1,19 @@
+body{
+    text-align: center;
+}
+h1 {
+    color: black;
+}
 .board td {
     width: 30px;
     height: 30px;
     text-align: center;
     transition: 0.5s;
-    margin-top: 150px;
-    position:relative;
+    margin-top: 200px;
     background-color: rgb(82, 173, 82);
     border: rgb(85, 81, 48);
     border-radius: 10px;
     border-style: groove;
-    margin: auto;
     border-style:groove;
     border-color: rgb, rgb(68, 71, 68);
     border-width: 5px;
@@ -23,7 +27,7 @@
 .center {
     margin-left: auto;
     margin-right: auto;
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 button {
@@ -68,13 +72,34 @@ button {
 .game-time {
     background-color: rgb(109, 192, 109);
     height: 55px;
-    width: 85px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 70px;
     margin-top: 20px;
-    position: relative;
     color: black;
     text-align: center;
     font-family:monospace;
     font-size: 4mm;
+    display: inline-block;
+}
+
+.life {
+    background-color: rgb(109, 192, 109);
+    height: 55px;
+    width: 85px;
+    margin-top: 20px;
+    color: black;
+    text-align: center;
+    font-family:monospace;
+    font-size: 4mm;
+    display: inline-block;
+}
+
+h2 {
+    margin-top: 30px;
+    font-family:monospace;
+}
+.emoji{
+    height: 55px;
+    width: 85px;
+    margin-left: auto;
+    margin-right: auto;
 }
