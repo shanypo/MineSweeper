@@ -27,6 +27,7 @@ function initGame() {
     gFirstClick = true;
     gCountShown = 0;
     gCountMines = 0;
+    clearInterval(gTimerInterval);
 
 }
 
@@ -35,7 +36,7 @@ function buildBoard() {
     for (var i = 0; i < gLevel.size; i++) {
         for (var j = 0; j < gLevel.size; j++) {
             var cell = {
-                minesAroundCount: 4,
+                minesAroundCount: EMPTY,
                 isShown: false,
                 isMarked: false,
                 isMine: false
@@ -75,11 +76,7 @@ function cellClicked(elCell, i, j) {
     if (currCell.isShown) return;
     var mineCount = currCell.minesAroundCount;
     if (!currCell.isMine && !currCell.isMarked) {
-        expandShown(i, j)
-        // currCell.isShown = true;
-        // elCell.innerText = mineCount === 0 ? 0 : mineCount;
-        // elCell.classList.remove('hidden');
-        // gCountShown++;
+        expandShown(i, j);
     } else {
         elCell.innerText = MINE_IMG;
         currCell.isShown = true;
@@ -87,6 +84,7 @@ function cellClicked(elCell, i, j) {
         
 
     }
+    isFirstClick(elCell, i, j);
     checkGameOver();
 }
 
@@ -128,7 +126,6 @@ function isFirstClick(elCell, i, j) {
         getMineCount();
         gTimeStart = new Date();
         gTimerInterval = (setInterval(renderTimer, 10));
-        gCountShown++;
     }
 
 }
@@ -146,7 +143,6 @@ function cellMarked(elCell) {
 
 function isRightClick(elCell, i, j, ev) {
     if (!gGameIsOn) return;
-    isFirstClick(elCell, i, j);
     if (ev.button === 2) {
         cellMarked(elCell);
     } else {
