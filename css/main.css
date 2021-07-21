@@ -1,0 +1,80 @@
+.board td {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    transition: 0.5s;
+    margin-top: 150px;
+    position:relative;
+    background-color: rgb(82, 173, 82);
+    border: rgb(85, 81, 48);
+    border-radius: 10px;
+    border-style: groove;
+    margin: auto;
+    border-style:groove;
+    border-color: rgb, rgb(68, 71, 68);
+    border-width: 5px;
+}
+
+.board td:hover{
+    background-color: rgb(119, 167, 139);
+    cursor:pointer;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+button {
+    background-color:rgb(109, 192, 109);
+    height: 50px;
+    width: 75px;
+    font-family:monospace;
+    font-size: 4mm; 
+    margin-left: 80px;
+    display: none;
+}
+
+.choose-level{
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgb(109, 192, 109);
+    height: 40px;
+    width: 260px;
+    text-align:center; 
+    text-decoration-line:inherit;
+    margin-top: 20px;
+    display: inline-block;
+    border-radius: 15px;
+    font-family:monospace;
+    font-size: 4mm;
+}
+
+.check-box1 {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.check-box2 {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.check-box3 {
+    margin-left: auto;
+    margin-right: auto;
+}
+.game-time {
+    background-color: rgb(109, 192, 109);
+    height: 55px;
+    width: 85px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    position: relative;
+    color: black;
+    text-align: center;
+    font-family:monospace;
+    font-size: 4mm;
+}

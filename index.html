@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body onload="initGame()"></body>
+<!-- <h2>Score: <span>0</span></h2> -->
+<div class="modal">
+    <h2> </h2>
+    <button class="play-again" onclick="init()">Play again</button>
+    
+    <div class="choose-level">choose level:
+        <div>
+            <input class="check-box1" type="radio" checked="checked" name="radio" onclick="chooseLevel(4, 2)"><label>easy</label>
+            <input class="check-box2" type="radio" checked="checked" name="radio" onclick="chooseLevel(8, 12)"><label> hard </label>
+            <input class="check-box3" type="radio" checked="checked" name="radio" onclick="chooseLevel(12, 30)"><label"> extreme</label>
+        </div>
+        <div class="game-time">
+            <label>game time:</label>
+            <label class="timer"></label>
+            
+        </div>
+    </div>
+</div>
+<table class="center">
+    <tbody class="board"></tbody>
+</table>
+<script src="js/utils.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+
+</html>
