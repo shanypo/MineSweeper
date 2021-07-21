@@ -195,7 +195,7 @@ function expandShown(row, col) {
                 var mineCount = currCell.minesAroundCount;
                 elCell.innerText = mineCount === 0 ? EMPTY : mineCount;
                 gCountShown++;
-                expandShown(i, j);
+                // expandShown(i, j);
             }
         }
     }
