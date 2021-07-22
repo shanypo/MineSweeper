@@ -21,7 +21,7 @@ var gCountShown;
 var gCountMines;
 var gHintMode;
 var gSecTime;
-var gPrevStep = [{} ,{}];
+var gPrevStep = [{}, {}];
 var gManuallMode;
 var gMinesCountMan;
 var gLevel = {
@@ -100,6 +100,7 @@ function checkGameOver() {
     }
     if (gCountMines === gLevel.mines || gLifes === 0) {
         var isWon = false;
+        revelMines();
         isVictory(isWon);
     }
 
@@ -164,7 +165,7 @@ function cellMarked(elCell) {
 
 function isRightClick(elCell, i, j, ev) {
     if (!gGameIsOn || gManuallMode) return;
-    if (ev.button === 2 && !elCell.isShown && gFlagsCount !== 0) {        
+    if (ev.button === 2 && !elCell.isShown && gFlagsCount !== 0) {
         cellMarked(elCell);
     } else {
         cellClicked(elCell, i, j);
@@ -223,7 +224,7 @@ function revelHints(row, col) {
             var currCell = gBoard[i][j];
             var elCell = document.querySelector('.cell-' + i + '-' + j);
             elCell.classList.add('hint-showd');
-            renderHintsCell(currCell, elCell) ;
+            renderHintsCell(currCell, elCell);
         }
     }
 }
@@ -292,14 +293,14 @@ function manuallButton() {
 }
 function setMinesManually(elCell, i, j) {
     gFirstClick = false;
-    
+
     if (!gManuallMode) return;
-    if (gMinesCountMan !== 0){
+    if (gMinesCountMan !== 0) {
         var currCell = gBoard[i][j];
         currCell.isMine = true;
         elCell.classList.add('mine');
         --gMinesCountMan;
-    } else{
+    } else {
         gManuallMode = false;
         getMineCount();
     }
@@ -348,7 +349,7 @@ function renderHints(numOfLite) {
 
 }
 
-function insertPrevStep(){
+function insertPrevStep() {
     // var step = {
     //     isFirstClick = gFirstClick,
 
@@ -365,3 +366,18 @@ function renderHintsCell(currCell, elCell) {
     gCountShown++;
     elCell.style.backgroundColor = '#ad9ee0';
 }
+
+function revelMines() {
+    for (var i = 0; i < gBoard.length; i++) {
+        for (var j = 0; j < gBoard.length; j++) {
+            var currCell = gBoard[i][j];
+            var elCell = document.querySelector(`.cell-${i}-${j}`);
+            if (currCell.isShown) continue;
+            if (currCell.isMine) {
+                elCell.innerHTML = MINE_IMG;
+            }
+        }
+    }
+
+}
+
