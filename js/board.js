@@ -38,7 +38,7 @@ function renderCell(currCell, elCell) {
     elCell.innerText = mineCount === 0 ? EMPTY : mineCount;
     elCell.classList.remove('hidden');
     gCountShown++;
-    elCell.style.backgroundColor = '#ad9ee0';
+    elCell.style.backgroundColor = '#78F9E1';
 }
 
 function closeModal() {

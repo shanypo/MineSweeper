@@ -44,6 +44,7 @@ function initGame() {
     gCountMines = 0;
     gGameIsOn = true;
     clearInterval(gTimerInterval);
+    document.querySelector('.timer').innerText = `00:00`
     var elEmogi = document.querySelector('.emoji');
     elEmogi.innerText = '😝';
     closeModal();
@@ -53,6 +54,7 @@ function initGame() {
     renderHeart(gLifes);
     renderHints(gHints);
     gMinesCountMan = gLevel.mines;
+
 
     // buildScoreBoard();
     // renderScoreBoard();
@@ -141,7 +143,7 @@ function isFirstClick(elCell, i, j) {
         elCell.innerText = mineCount === 0 ? EMPTY : mineCount;
         elCell.classList.remove('hidden');
         gCountShown++;
-        elCell.style.backgroundColor = '#ad9ee0';
+        elCell.style.backgroundColor = '#78F9E1';
         gFirstClick = false;
         gFlagsCount = gLevel.mines;
         var elFlags = document.querySelector('span:nth-child(3)');
