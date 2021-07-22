@@ -7,7 +7,7 @@ function renderBoard(board) {
       var currCell = board[i][j];
       var className = `cell cell-${i}-${j}`;
       className += currCell.isMine ? ' mine': ' hidden';
-      strHTML += `<td class="${className}" onmousedown="isRightClick(this, ${i}, ${j},event)"></td>\n`
+      strHTML += `<td class="${className}" onmousedown="isRightClick(this, ${i}, ${j},event), setMinesManually(this,${i}, ${j})""></td>\n`
       
     }
   }
@@ -66,18 +66,18 @@ function shuffle(numbers){
     }
         return numbers;
 }
-
 function renderTimer() {
   var timeDiff = Date.now() - gTimeStart;
   var seconds = parseInt(timeDiff / 1000);
   var timeDiffStr = timeDiff.toString();
   var ms = timeDiffStr.substring(timeDiffStr.length - 3);
   if (ms.length < 2) {
-      ms = `00${ms}`;
+    ms = `00${ms}`;
   } else if (ms.length < 3) {
-      ms = `0${ms}`;
+    ms = `0${ms}`;
   }
   if (seconds < 10) seconds = `0${seconds}`;
+  gSecTime = `${seconds}.${ms}`;
   document.querySelector('.timer').innerText = `${seconds}.${ms}`
 }
 
@@ -90,4 +90,18 @@ function getRandomCell() {
 
 function getSelector(coord) { // {i:3 , j:5}
   return '.cell-' + i + '-' + j // #cell-3-5
+}
+
+function getNeegsLoc(row, col) {
+  var neighbors = [];
+  for (var i = row - 1; i <= row + 1; i++) {
+      if (i < 0 || i > gBoard.length - 1) continue;
+      for (var j = col - 1; j <= col + 1; j++) {
+          if (j < 0 || j > gBoard[i].length - 1) continue;
+          var cell = gBoard[i][j];
+          if (cell.isMarked || cell.isShown) continue;
+          neighbors.push({i, j}); 
+      }
+  }
+  return neighbors;
 }
