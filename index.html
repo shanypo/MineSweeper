@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,29 +10,43 @@
 </head>
 
 <body onload="initGame()"></body>
-<div> 
-    <h1> Mine Sweeper</h1> 
+<div>
+    <h1> Mine Sweeper</h1>
 </div>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cairo">
-<h2><span> </span>| <img src="img/flag.png"><span>:  </span> |<span onclick="initGame()" class="emoji">😝</span>|<span> </span> <span onclick="HintCliked()">  </span></h2>
-<div class="timer"></div> 
-<h2 class="choose-level"><img src="img/level.png"></h2> 
+<h2><span class="heart"></span> </span>| <img src="img/flag.png"><span>: </span> |<span onclick="initGame()" class="emoji">😝</span>|<span>
+    </span> <span onclick="HintCliked()"> </span></h2>
+<div class="timer"></div>
+<h2 class="choose-level"><img src="img/level.png"></h2>
 <div class="levels">
     <button class="levels1" onclick="chooseLevel(4, 2)">Easy</button>
-    <button class="levels1" onclick="chooseLevel(8, 12)">Hard</button> 
+    <button class="levels1" onclick="chooseLevel(8, 12)">Hard</button>
     <button class="levels1" onclick="chooseLevel(12, 30)">Extreme</button>
 </div>
-
-
+<table class="score-board">
+        <tr>
+            <th>Level:</th>
+            <th>Score:</th>
+        </tr>
+        <tr>
+            <td>Easy:</td>
+            <td class="easy">0</td>
+        </tr>
+        <tr>
+            <td>Hard</td>
+            <td class="hard">0</td>
+        </tr>
+        <tr>
+            <td>Extreme</td>
+            <td class="extreme">0</td>
+        </tr>
+</table> 
 <table class="center">
     <div class="modal"></div>
     <tbody class="board"></tbody>
 </table>
-<tbody class="score-board"></tbody>
-<table class="score">
-</table>
 
-<button class="safe" onclick="safeToClick()">Safe here</button>
+<button class="safe" onclick="safeToClick()">Safe here <span> 3</span></button>
 <button class="manually" onclick="manuallButton()">Manually</button>
 <script src="js/utils.js"></script>
 <script src="js/board.js"></script>

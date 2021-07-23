@@ -23,7 +23,9 @@ var gHintMode;
 var gSecTime;
 var gPrevStep = [{}, {}];
 var gManuallMode;
+var gSafeClick;
 var gMinesCountMan;
+var gScoreBoard;
 var gLevel = {
     size: 4,
     mines: 2
@@ -54,10 +56,10 @@ function initGame() {
     renderHeart(gLifes);
     renderHints(gHints);
     gMinesCountMan = gLevel.mines;
-
-
-    // buildScoreBoard();
-    // renderScoreBoard();
+    gSafeClick = 3;
+    updateSafeClick();
+    saveScore();
+    updateBody();
 }
 
 function getMineCount() {
@@ -96,7 +98,6 @@ function cellClicked(elCell, i, j) {
 
 function checkGameOver() {
     var numCellWin = gLevel.size * gLevel.size;
-    // debugger
     if (gLifes !== 0) {
         renderHeart(gLifes);
     }
@@ -115,19 +116,19 @@ function checkGameOver() {
 function isVictory(isWon) {
     var elEmogi = document.querySelector('.emoji');
     var elModal = document.querySelector('.modal');
+    var elBody = document.querySelector('body');
     elModal.style.display = 'block';
     if (isWon) {
         elEmogi.innerText = '🤩';
-        elModal.innerText = 'your the queen! '
-
+        elModal.innerText = 'Your the queen!'
     } else {
         elEmogi.innerText = '🙈';
-        elModal.innerText = 'such a bumer...'
+        elModal.innerText = 'Maby next time...';
+        elBody.style.filter = 'brightness(50%)';
     }
     clearInterval(gTimerInterval);
     saveScore();
     gGameIsOn = false;
-
 }
 function isFirstClick(elCell, i, j) {
     var currCell = gBoard[i][j];
@@ -138,18 +139,13 @@ function isFirstClick(elCell, i, j) {
             insertMines(i, j);
             getMineCount();
         }
-        currCell.isShown = true;
-        var mineCount = currCell.minesAroundCount;
-        elCell.innerText = mineCount === 0 ? EMPTY : mineCount;
-        elCell.classList.remove('hidden');
-        gCountShown++;
-        elCell.style.backgroundColor = '#78F9E1';
-        gFirstClick = false;
         gFlagsCount = gLevel.mines;
+        gFirstClick = false;
         var elFlags = document.querySelector('span:nth-child(3)');
         elFlags.innerText = ' : ' + gFlagsCount;
         gTimeStart = new Date();
         gTimerInterval = (setInterval(renderTimer, 10));
+        expandShown(i, j);
     }
 }
 function cellMarked(elCell) {
@@ -163,7 +159,6 @@ function cellMarked(elCell) {
     }
     elCell.isMarked = !elCell.isMarked;
 }
-
 
 function isRightClick(elCell, i, j, ev) {
     if (!gGameIsOn || gManuallMode) return;
@@ -250,32 +245,24 @@ function HintCliked() {
 
 function getBestScore(level, score) {
     var bestScore = localStorage.getItem(`${level}bestTime`);
-
-    if (bestScore) {
-        if (score < bestScore) {
-            localStorage.setItem(`${level}bestTime`, score);
-            score = gSecTime;
-            localStorage.setItem(`${level}bestScore`, score);
-        }
-
+    if (bestScore === null) {
+        localStorage.setItem(`${level}bestTime`, score);
+        score = gSecTime;
     }
-    localStorage.setItem(`${level}bestTime`, score);
-    score = gSecTime;
-    // console.log('score', score);
-    localStorage.setItem(`${level}bestScore`, score);
-    gSecTime = score;
-    // console.log('gsectime', gSecTime);
-
+    if (score < bestScore) {
+        localStorage.setItem(`${level}bestTime`, score);
+        score = gSecTime;
+    }
+    var elScore = document.querySelector(`.${level}`);
+    elScore.innerHTML = bestScore;
 }
 
 function saveScore() {
-    gSecTime ? '00:000' : gSecTime;
+    gSecTime === null ? '00:000' : gSecTime;
     switch (gLevel.size) {
         case EASY:
-
             gScores.easy = gSecTime;
             getBestScore('easy', gScores.easy);
-
             break;
 
         case HARD:
@@ -291,6 +278,14 @@ function saveScore() {
 }
 
 function manuallButton() {
+    var elBtnManually = document.querySelector('.manually');
+    if (!gManuallMode) {
+        elBtnManually.style.cursor = 'not-allowed';
+        elBtnManually.style.backgroundColor = '#f5a5a8';
+    } else {
+        elBtnManually.style.cursor = 'pointer';
+        elBtnManually.style.backgroundColor = '#e4686c';
+    }
     gManuallMode = !gManuallMode;
 }
 function setMinesManually(elCell, i, j) {
@@ -309,11 +304,12 @@ function setMinesManually(elCell, i, j) {
 }
 
 function safeToClick() {
-    if (gFirstClick || gBoard.safeClick === 0) return;
+    if (gFirstClick || gSafeClick === 0) return;
     var safeCell = getSafeCell();
     if (!safeCell) return;
     var elSafeCell = document.querySelector(`.cell-${safeCell.i}-${safeCell.j}`);
-    gBoard.safeClick--;
+    --gSafeClick;
+    updateSafeClick();
     elSafeCell.style.backgroundColor = '#ad9ee0';
     setTimeout(function () {
         elSafeCell.style.backgroundColor = '#7A5AE4';
@@ -380,6 +376,30 @@ function revelMines() {
             }
         }
     }
+
+}
+
+function updateSafeClick() {
+    var elSafesPAN = document.querySelector('.safe span');
+    elSafesPAN.innerText = gSafeClick;
+    var elBtnSafe = document.querySelector('.safe');
+    if (gSafeClick === 0) {
+        elBtnSafe.style.cursor = 'not-allowed';
+        elBtnSafe.style.backgroundColor = '#f5a5a8';
+    } else {
+        elBtnSafe.style.cursor = 'pointer';
+        elBtnSafe.style.backgroundColor = '#e4686c';
+    }
+
+}
+
+function updateBody() {
+    var elBody = document.querySelector('body');
+    elBody.style.filter = 'brightness(100%)';
+
+
+
+
 
 }
 

@@ -8,7 +8,7 @@ function renderBoard(board) {
       var className = `cell cell-${i}-${j}`;
       className += currCell.isMine ? ' mine': ' hidden';
       strHTML += `<td class="${className}" onmousedown="isRightClick(this, ${i}, ${j},event), setMinesManually(this,${i}, ${j})""></td>\n`
-      
+ 
     }
   }
   strHTML += '</tr>\n';
@@ -70,10 +70,10 @@ function renderTimer() {
   var timeDiff = Date.now() - gTimeStart;
   var seconds = parseInt(timeDiff / 1000);
   var timeDiffStr = timeDiff.toString();
-  var ms = timeDiffStr.substring(timeDiffStr.length - 3);
+  var ms = timeDiffStr.substring(timeDiffStr.length - 2);
   if (ms.length < 2) {
     ms = `00${ms}`;
-  } else if (ms.length < 3) {
+  } else if (ms.length < 2) {
     ms = `0${ms}`;
   }
   if (seconds < 10) seconds = `0${seconds}`;

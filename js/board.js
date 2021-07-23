@@ -10,7 +10,6 @@ function buildBoard() {
                 isMine: false,
                 steps: [],
                 bestScore: [],
-                safeClick: 3
             };
             gBoard[i][j] = cell;
         }
@@ -51,40 +50,9 @@ function playSoundDeath() {
     sound.play();
 }
 
-function buildScoreBoard() {
-    var gScoreBoard = [];
-    for (var i = 0; i < 10; i++) {
-        var cell = {
-            score: 0,
-            level: 'easy'
-        };
-        gScoreBoard.push(cell);
-
-    }
-    return gScoreBoard;
-}
-
-function renderScoreBoard(gScoreBoard) {
-    console.log('gScoreBoard',gScoreBoard);
-    
-    var strHTML = '';
-    for (var i = 0; i < 5; i++) {
-        strHTML += '<tr>';
-        for (var j = 0; j < 2; j++) {
-            var cell = gScoreBoard.pop();
-            strHTML += `<td
-            ${cell}</td>`;
-        }
-    }
-    strHTML += `</tr>`;
-    var elBoard = document.querySelector('table .board');
-
-    elBoard.innerHTML = strHTML;
-}
-
-function renderImg(element, img){
+function renderImg(element, img) {
     var str = '';
-    for(var i = 0; i < element; i++){
+    for (var i = 0; i < element; i++) {
         str += img;
         str += ' ';
     }

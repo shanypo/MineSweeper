@@ -2,6 +2,7 @@
 body{
     text-align: center;
     background: #78F9E1;
+    filter:grayscale(0%);
 }
 h1 {
     background-color: #FF5A60;
@@ -14,7 +15,11 @@ h1 {
     width: 400px;
     margin-top: 0px;
     border-radius: 10px;
-    /* background-color: ; */
+}
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -20px;
 }
 .board td {
     width: 32px;
@@ -30,25 +35,18 @@ h1 {
     font-family: 'Cairo';
 
 }
-
 img {
     height: 30px;
 }
 .board td:hover{
-    background-color: rgb(119, 167, 139);
+    background-color: #baaee4;
     cursor:pointer;
-}
-
-.center {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: -5px;
 }
 
 button.manually{
     background-color:#e4686c;
     height: 50px;
-    width: 120px;
+    width: 150px;
     font-weight: bolder;
     border-radius: 15px;
     font-size: 15pt; 
@@ -60,7 +58,7 @@ button.manually{
 button.safe{
     background-color:#e4686c;
     height: 50px;
-    width: 120px;
+    width: 150px;
     font-weight: bolder;
     border-radius: 15px;
     font-size: 15pt; 
@@ -70,22 +68,37 @@ button.safe{
     cursor: pointer;
 }
 
+button.safe:active {
+    background-color: #e9a5a7;
+    box-shadow: 0 5px #e68b8e;
+    transform: translateY(15px);
+}
+
+button.manually:active {
+    background-color: #e9a5a7;
+    box-shadow: 0 5px #e68b8e;
+    transform: translateY(15px);
+}
+
+button.safe:hover {
+    background-color: #e9a5a7;
+    box-shadow: 0 5px #e68b8e;
+    transform: translateY(6px);
+    transition: 1s;
+    transform:rotate(360deg);
+}
+
+button.manually:hover {
+    background-color: #e9a5a7;
+    box-shadow: 0 5px #e68b8e;
+    transform: translateY(6px);
+    transition: 1s;
+    transform:rotate(360deg);
+}
+
 .choose-level img{
     height: 70px;
     margin-bottom: -50px;
-    /* color: #7A5AE4;
-    height: 10px;
-    width: 260px;
-    text-align:center; 
-    text-decoration-line:inherit;
-    margin-top: -10px;
-    display: inline-block;
-    border-radius: 15px;
-    font-family:Helvetica;
-    font-size: 30pt;
-    font-family: 'Cairo';
-    font-weight: black;
-    text-decoration-line:underline; */
 }
 
 .game-time {
@@ -105,7 +118,7 @@ button.safe{
     font-size: 17pt;
     display: inline;
     margin-top: -70px;
-    margin-left: 210px;
+    margin-left: 180px;
     color:#FF5A60;
     position:absolute;
 }
@@ -123,7 +136,7 @@ h2 {
 }
 .emoji{
     height: 55px;
-    width: 85px;
+    width: 45px;
     margin-left: auto;
     margin-right: auto;
     cursor:pointer;
@@ -143,21 +156,21 @@ h2 {
     font-style: italic;
     text-align: center;
     margin-left: 775px;
-    margin-top: -53px;
+    margin-top: -70px;
+    transform: 2s;
 }
-.score {
-    background-color: #FF5A60;
-    display:none;
+.modal:hover{
+    transform:rotate(360deg);
 }
+
 .bomb {
     display:inline-block;
     height: 30px;
-
 }
 button.levels1{
     font-family: 'Cairo';
     font-size: 13pt;
-    font-weight: bold;
+    font-weight: black;
     text-align: center;
     color: #7A5AE4;
     margin-top: 20px;
@@ -171,10 +184,16 @@ button.levels1{
     padding-bottom: 30px;
 }
 
+button.levels1:hover {
+    background-color: #90fae6;
+    box-shadow: 0 5px #a390e0;
+    transform: translateY(3px);
+    transition: 1s;
+}
 button.levels1:active {
-    background-color: #78F9E1;
-    box-shadow: 0 5px #b4a4e7;
-    transform: translateY(4px);
+    background-color: #90fae6;
+    box-shadow: 0 5px #a390e0;
+    transform: translateY(10px);
 }
 
 .levels {
@@ -184,8 +203,49 @@ button.levels1:active {
 }
 .center img{
     height: 20px;
+    margin-top: 8px;
+    margin-left: 3px;
 }
 
 span:nth-child(6){
     cursor: pointer;
 }
+.heart span:nth-child(1){
+   margin-left: 30px;
+}
+span:nth-child(5){
+    margin-right: 5px;
+ }
+.score-board td {
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    transition: 0.5s;
+    margin-top: 200px;
+    border: #FF5A60;
+    border-radius: 10px;
+    border-style:outset;
+    border-width: 5px;
+    font-family: 'Cairo';
+}
+
+.score-board {
+    display:inline-block;
+    margin-right: 900px;
+    margin-top: -800px;
+}
+.score-board th{
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    transition: 0.5s;
+    margin-top: 200px;
+    border: #FF5A60;
+    border-radius: 10px;
+    border-style:outset;
+    border-width: 5px;
+    font-family: 'Cairo';
+    
+}
+
+  
