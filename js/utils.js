@@ -81,9 +81,9 @@ function renderTimer() {
   document.querySelector('.timer').innerText = `${seconds}.${ms}`
 }
 
-function getRandomCell() {
-  var emptyCells = getEmptyCelss();
-  var randomIdx = getRandomInt(0, gBoard.length);
+function getRandomCell(row, col) {
+  var emptyCells = getEmptyCelss(row, col);
+  var randomIdx = getRandomInt(0,gBoard.length);
   var emptyCell = emptyCells[randomIdx];
   return emptyCell;
 }

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Mine Sweeper</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
 
@@ -17,30 +17,31 @@
 <h2><span class="heart"></span> </span>| <img src="img/flag.png"><span>: </span> |<span onclick="initGame()" class="emoji">😝</span>|<span>
     </span> <span onclick="HintCliked()"> </span></h2>
 <div class="timer"></div>
-<h2 class="choose-level"><img src="img/level.png"></h2>
+<h2 class="choose-level"><img src="img/level2.png"></h2>
 <div class="levels">
     <button class="levels1" onclick="chooseLevel(4, 2)">Easy</button>
     <button class="levels1" onclick="chooseLevel(8, 12)">Hard</button>
     <button class="levels1" onclick="chooseLevel(12, 30)">Extreme</button>
 </div>
-<table class="score-board">
+<div class="score-div"><table class="score-board">
         <tr>
             <th>Level:</th>
             <th>Score:</th>
         </tr>
         <tr>
             <td>Easy:</td>
-            <td class="easy">0</td>
+            <td class="easy">00:00</td>
         </tr>
         <tr>
             <td>Hard</td>
-            <td class="hard">0</td>
+            <td class="hard">00:00</td>
         </tr>
         <tr>
             <td>Extreme</td>
-            <td class="extreme">0</td>
+            <td class="extreme">00:00</td>
         </tr>
 </table> 
+</div>
 <table class="center">
     <div class="modal"></div>
     <tbody class="board"></tbody>
@@ -48,6 +49,8 @@
 
 <button class="safe" onclick="safeToClick()">Safe here <span> 3</span></button>
 <button class="manually" onclick="manuallButton()">Manually</button>
+<!-- <button class="Undo" onclick="undo()">Undo</button> -->
+
 <script src="js/utils.js"></script>
 <script src="js/board.js"></script>
 <script src="js/game.js"></script>

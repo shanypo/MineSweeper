@@ -59,7 +59,6 @@ function initGame() {
     gSafeClick = 3;
     updateSafeClick();
     saveScore();
-    updateBody();
 }
 
 function getMineCount() {
@@ -93,6 +92,7 @@ function cellClicked(elCell, i, j) {
 
 
     isFirstClick(elCell, i, j);
+    insertPrevStep(i, j);
     checkGameOver();
 }
 
@@ -116,7 +116,6 @@ function checkGameOver() {
 function isVictory(isWon) {
     var elEmogi = document.querySelector('.emoji');
     var elModal = document.querySelector('.modal');
-    var elBody = document.querySelector('body');
     elModal.style.display = 'block';
     if (isWon) {
         elEmogi.innerText = '🤩';
@@ -124,7 +123,6 @@ function isVictory(isWon) {
     } else {
         elEmogi.innerText = '🙈';
         elModal.innerText = 'Maby next time...';
-        elBody.style.filter = 'brightness(50%)';
     }
     clearInterval(gTimerInterval);
     saveScore();
@@ -146,6 +144,7 @@ function isFirstClick(elCell, i, j) {
         gTimeStart = new Date();
         gTimerInterval = (setInterval(renderTimer, 10));
         expandShown(i, j);
+        insertPrevStep(i, j);
     }
 }
 function cellMarked(elCell) {
@@ -167,11 +166,15 @@ function isRightClick(elCell, i, j, ev) {
     } else {
         cellClicked(elCell, i, j);
     }
+    insertPrevStep(i, j);
 }
 
 function insertMines(row, col) {
-    for (var i = 0; i < gLevel.mines; i++) {
-        var cell = getRandomCell(row, col);
+    for (var i = 0; i < gLevel.mines; i++) {        
+        var cell = getRandomCell(row, col);  
+        if (gBoard[cell.i][cell.j].isMine){
+            cell = getRandomCell(); 
+        }      
         gBoard[cell.i][cell.j].isMine = true;
     }
 }
@@ -347,13 +350,36 @@ function renderHints(numOfLite) {
 
 }
 
-function insertPrevStep() {
-    // var step = {
-    //     isFirstClick = gFirstClick,
+function insertPrevStep(i, j) {
+    var step = {
+        isFirstClick: gFirstClick,
+        countShows: gCountShown,
+        // showsCell: gBoard[i][j].isShow,
+        // markedCell: gBoard[i][j].isMarked,
+        lifes: gLifes,
+        hints: gHints,
+        safeClick: gSafeClick,
+        flags: gFlagsCount,
+        minesCount: gCountMines,
+        board: gBoard
+    }
+    gPrevStep.push(step);
+}
 
-
-
-    // prevStep.push()
+function undo() {
+    if (gGameIsOn && gPrevStep.length !== 0) {
+        gLifes = gPrevStep.lifes;
+        gHints = gPrevStep.hints;
+        gSafeClick = gPrevStep.safeClick;
+        gFlagsCount = gPrevStep.flags;
+        gCountMines = gPrevStep.mineCount;
+        gCountShown = gPrevStep.countShows;
+        gBoard = gPrevStep.board;
+        gFirstClick = gPrevStep.isFirstClick;
+        renderHeart(gLifes);
+        renderHints(gHints);
+        renderBoard(gBoard);
+    }
 }
 
 function renderHintsCell(currCell, elCell) {
@@ -393,13 +419,5 @@ function updateSafeClick() {
 
 }
 
-function updateBody() {
-    var elBody = document.querySelector('body');
-    elBody.style.filter = 'brightness(100%)';
 
-
-
-
-
-}
 
