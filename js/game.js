@@ -89,7 +89,6 @@ function cellClicked(elCell, i, j) {
         renderHints(gHints);
     }
 
-
     isFirstClick(elCell, i, j);
     insertPrevStep(i, j);
     checkGameOver();
@@ -119,12 +118,12 @@ function isVictory(isWon) {
     if (isWon) {
         elEmogi.innerText = '🤩';
         elModal.innerText = 'Your the queen!'
+        saveScore();
     } else {
         elEmogi.innerText = '🙈';
         elModal.innerText = 'Maby next time...';
     }
     clearInterval(gTimerInterval);
-    saveScore();
     gGameIsOn = false;
 }
 function isFirstClick(elCell, i, j) {
@@ -279,6 +278,7 @@ function saveScore() {
 
 function manuallButton() {
     var elBtnManually = document.querySelector('.manually');
+
     if (!gManuallMode) {
         elBtnManually.style.cursor = 'not-allowed';
         elBtnManually.style.backgroundColor = '#f5a5a8';
