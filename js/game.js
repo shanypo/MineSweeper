@@ -250,7 +250,6 @@ function getBestScore(level, score) {
     if (bestScore !== null) {
         if (score < bestScore) {
             localStorage.setItem(`${level}bestTime`, score);
-            console.log(localStorage.setItem(`${level}bestTime`, score));
             score = gSecTime;
         }
     }

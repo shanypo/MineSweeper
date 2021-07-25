@@ -160,10 +160,9 @@ h2 {
 .modal:hover{
     transform:rotate(360deg);
 }
-
 .bomb {
     display:inline-block;
-    height: 30px;
+    height: 17px;
 }
 button.levels1{
     font-family: 'Cairo';
