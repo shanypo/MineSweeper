@@ -58,7 +58,6 @@ function initGame() {
     gMinesCountMan = gLevel.mines;
     gSafeClick = 3;
     updateSafeClick();
-    saveScore();
 }
 
 function getMineCount() {
@@ -248,13 +247,12 @@ function HintCliked() {
 
 function getBestScore(level, score) {
     var bestScore = localStorage.getItem(`${level}bestTime`);
-    if (bestScore === null) {
-        localStorage.setItem(`${level}bestTime`, score);
-        score = gSecTime;
-    }
-    if (score < bestScore) {
-        localStorage.setItem(`${level}bestTime`, score);
-        score = gSecTime;
+    if (bestScore !== null) {
+        if (score < bestScore) {
+            localStorage.setItem(`${level}bestTime`, score);
+            console.log(localStorage.setItem(`${level}bestTime`, score));
+            score = gSecTime;
+        }
     }
     var elScore = document.querySelector(`.${level}`);
     elScore.innerHTML = bestScore;
