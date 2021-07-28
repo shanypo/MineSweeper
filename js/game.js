@@ -73,22 +73,23 @@ function getMineCount() {
 function cellClicked(elCell, i, j) {
     var currCell = gBoard[i][j];
     if (currCell.isShown) return;
-    if (!currCell.isMine && !currCell.isMarked && !gFirstClick && !gHintMode) {
-        expandShown(i, j);
-    } else if (currCell.isMine) {
-        elCell.innerHTML = MINE_IMG;
-        playSoundDeath();
-        currCell.isShown = true;
-        --gLifes;
-        ++gCountMines;
-    }
     if (gHintMode) {
         revelHints(i, j);
         setTimeout(unReveal, 1000);
         --gHints;
         renderHints(gHints);
     }
-
+    if (!currCell.isMine && !currCell.isMarked && !gFirstClick && !gHintMode) {
+        expandShown(i, j);
+    } else if (currCell.isMine) {
+        // CR: good DOM manipulation
+        elCell.innerHTML = MINE_IMG;
+        playSoundDeath();
+        currCell.isShown = true;
+        --gLifes;
+        ++gCountMines;
+    }
+    // CR: maybe a better place for isFirstClick call is at the beginning of the func?
     isFirstClick(elCell, i, j);
     insertPrevStep(i, j);
     checkGameOver();
@@ -111,6 +112,7 @@ function checkGameOver() {
     }
 }
 
+// CR: not a good func name. maybe a better name will be setGameOver
 function isVictory(isWon) {
     var elEmogi = document.querySelector('.emoji');
     var elModal = document.querySelector('.modal');
@@ -126,6 +128,8 @@ function isVictory(isWon) {
     clearInterval(gTimerInterval);
     gGameIsOn = false;
 }
+
+// CR: remove unused vars 
 function isFirstClick(elCell, i, j) {
     var currCell = gBoard[i][j];
     if (gFirstClick) {
@@ -145,6 +149,7 @@ function isFirstClick(elCell, i, j) {
         insertPrevStep(i, j);
     }
 }
+
 function cellMarked(elCell) {
     var elFlag = document.querySelector('span:nth-child(3)');
     if (elCell.isMarked) {
@@ -218,7 +223,7 @@ function revelHints(row, col) {
         if (i < 0 || i > gBoard.length - 1) continue;
         for (var j = col - 1; j <= col + 1; j++) {
             if (j < 0 || j > gBoard[i].length - 1) continue;
-            // if(currCell.isMine) continue;
+            if(gBoard[row][col].isMine) continue;
             var currCell = gBoard[i][j];
             var elCell = document.querySelector('.cell-' + i + '-' + j);
             elCell.classList.add('hint-showd');
@@ -235,12 +240,11 @@ function unReveal() {
         allHints[i].innerText = EMPTY;
         allHints[i].style.backgroundColor = '#7A5AE4';
         gCountShown--;
-
     }
     gHintMode = false;
 }
 
-function HintCliked() {
+function hintCliked() {
     gHintMode = true;
 }
 

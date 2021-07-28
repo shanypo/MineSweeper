@@ -1,4 +1,4 @@
-
+//CR: we won't leave any unused funcs in our files after developing
 function renderBoard(board) {
   var strHTML = '';
   for (var i = 0; i < board.length; i++) {
@@ -7,6 +7,7 @@ function renderBoard(board) {
       var currCell = board[i][j];
       var className = `cell cell-${i}-${j}`;
       className += currCell.isMine ? ' mine': ' hidden';
+      // CR: google for oncontextmenu
       strHTML += `<td class="${className}" onmousedown="isRightClick(this, ${i}, ${j},event), setMinesManually(this,${i}, ${j})""></td>\n`
  
     }

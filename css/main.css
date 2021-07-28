@@ -16,7 +16,9 @@ h1 {
     border-radius: 10px;
 }
 .center {
+    display: flex;
     margin-left: auto;
+    justify-content: center;
     margin-right: auto;
     margin-top: -5px;
 }
@@ -245,7 +247,7 @@ span:nth-child(5){
     border-width: 5px;
     width: 190px;
     height: 200px;
-    display:inline-block;
+    display:flex;
     position:absolute;
     margin-left: 400px;
     margin-top: -20px;
@@ -256,3 +258,36 @@ span:nth-child(5){
 }
 
   
+@media screen and (max-width:450px){
+
+    .score-div{
+        transform: translate(-300px, 480px);
+        height: 150px;
+        width: 140px;
+        padding: auto;
+    }
+
+    h1{
+        width: 300px;
+        font-size:25pt;
+    }
+
+    h2{
+        margin-top: unset;
+    }
+
+    .timer{
+        margin-top: -40px;
+        display: flex;
+    }
+    .modal{
+        transform: translate(-700px, -1px);
+    }
+
+    .score-board td{
+      font-size: 10pt;
+    }
+    .score-board th{
+        font-size: 12pt;
+    }
+}

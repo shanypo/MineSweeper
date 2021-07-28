@@ -3,6 +3,7 @@ function buildBoard() {
     var gBoard = createMat(gLevel.size, gLevel.size);
     for (var i = 0; i < gLevel.size; i++) {
         for (var j = 0; j < gLevel.size; j++) {
+            // CR: it will be cleaner to send it to another function and get back the cell
             var cell = {
                 minesAroundCount: EMPTY,
                 isShown: false,
